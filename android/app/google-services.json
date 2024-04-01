@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "286381103712",
+    "project_id": "vtg-app-a1bf7",
+    "storage_bucket": "vtg-app-a1bf7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:286381103712:android:f8540247b8e7e97a7b0105",
+        "android_client_info": {
+          "package_name": "com.example.vtg_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzfKuxUszTDLBG9I95qm3Ew04FsZSkZuE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
