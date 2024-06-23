@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vtg_app/models/onboarding_contents.dart';
+import 'package:vtg_app/data/models/onboarding_contents.dart';
 
 class MainPageWidget extends StatelessWidget {
   const MainPageWidget({super.key, required this.page});

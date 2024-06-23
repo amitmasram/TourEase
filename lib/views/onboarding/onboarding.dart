@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:concentric_transition/page_view.dart';
-import 'package:vtg_app/models/onboarding_contents.dart';
+import 'package:vtg_app/data/models/onboarding_contents.dart';
 import 'package:vtg_app/views/authentication/home_auth_screen.dart';
-import 'package:vtg_app/widgets/onboarding_widget.dart';
+import 'package:vtg_app/views/widgets/onboarding_widget.dart';
 
 class Onboarding extends StatefulWidget {
   const Onboarding({super.key});

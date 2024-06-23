@@ -2,8 +2,8 @@ import 'package:animate_do/animate_do.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:vtg_app/services/firebase/auth_service.dart';
-import 'package:vtg_app/views/authentication/login_screen.dart';
+import 'package:vtg_app/view-model/services/firebase/auth_service.dart';
+import 'package:vtg_app/views/authentication/login/login_screen.dart';
 import 'package:vtg_app/views/main_screen/main_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -168,60 +168,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
     );
   }
 
-  // void signUp() async {
-  //   try {
-  //     final UserCredential userCredential =
-  //         await _auth.createUserWithEmailAndPassword(
-  //       email: _emailController.text,
-  //       password: _passwordController.text,
-  //     );
-
-  //     // Generate unique identifier based on user's email
-  //     String userId =
-  //         _emailController.text.replaceAll('@', '').replaceAll('.', '');
-
-  //     // Once user is created, update their profile to include name
-  //     await userCredential.user!
-  //         .updateProfile(displayName: _nameController.text);
-
-  //     // Store user's name and unique identifier in Cloud Firestore
-  //     await _firestore.collection('users').doc(userId).set({
-  //       'name': _nameController.text,
-  //       'email': _emailController.text,
-  //       // You can add more user data here
-  //     });
-
-  //     // Navigate to another screen or perform any other actions
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => const LoginScreen()),
-  //     );
-  //   } catch (e) {
-  //     // Handle sign up errors here
-  //     print("Error signing up: $e");
-  //     // Show error message to the user
-  //     ScaffoldMessenger.of(context).showSnackBar(
-  //       SnackBar(content: Text("Error signing up: $e")),
-  //     );
-  //   }
-  // }
-
-  // void _signUp() async {
-  //   String username = _nameController.text;
-  //   String email = _emailController.text;
-  //   String password = _passwordController.text;
-
-  //   User? user = await _auth.signUpWithEmailAndPassword(email, password);
-
-  //   if (user != null) {
-  //     print("User is successfully created");
-  //     Navigator.pushReplacement(
-  //       context,
-  //       MaterialPageRoute(builder: (context) => const MainScreen()),
-  //     );
-  //   }
-  // }
-
   void _signUp() async {
     String username = _nameController.text.trim();
     String email = _emailController.text.trim();
@@ -292,6 +238,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
             ),
             border: OutlineInputBorder(
               borderSide: BorderSide(color: Colors.grey.shade400),
+            ),
+            focusedBorder: const OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.greenAccent),
             ),
           ),
         ),

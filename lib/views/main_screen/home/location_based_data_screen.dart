@@ -1,8 +1,8 @@
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vtg_app/views/main_screen/home/carousal_slider.dart';
 
-import '../../../models/location_dummy.dart';
+import '../../../data/models/location_dummy.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({super.key});
@@ -83,6 +83,7 @@ class _LocationScreenState extends State<LocationScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      // ignore: avoid_unnecessary_containers
                       Container(
                         child: const FaIcon(
                           FontAwesomeIcons.locationArrow,
@@ -138,7 +139,10 @@ class _LocationScreenState extends State<LocationScreen> {
 class DetailsScreen extends StatelessWidget {
   final Location location;
 
-  const DetailsScreen({super.key, required this.location});
+  const DetailsScreen({
+    Key? key,
+    required this.location,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -205,7 +209,7 @@ class DetailsScreen extends StatelessWidget {
                         location.district,
                         style: const TextStyle(fontSize: 16),
                       ),
-                      SizedBox(
+                      const SizedBox(
                         width: 5,
                       ),
                       Text(

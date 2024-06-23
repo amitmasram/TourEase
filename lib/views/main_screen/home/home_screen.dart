@@ -1,15 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// ignore: unnecessary_import
-import 'package:flutter/widgets.dart';
+
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:vtg_app/models/travel_dummy.dart';
+
 import 'package:vtg_app/views/main_screen/home/carousal_slider.dart';
 import 'package:vtg_app/views/main_screen/home/location_based_data_screen.dart';
 
-import '../../../models/location_dummy.dart';
+import '../../../data/models/location_dummy.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -36,22 +35,33 @@ class _HomeScreenState extends State<HomeScreen> {
               return Text(
                 'Welcome',
                 style:
-                    GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.bold),
+                    GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.w300),
               );
             } else {
               if (snapshot.hasError) {
                 return Text(
                   'Welcome',
                   style: GoogleFonts.lato(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                      fontSize: 24, fontWeight: FontWeight.w100),
                 );
               } else {
                 var userData = snapshot.data!.data() as Map<String, dynamic>;
                 String userName = userData['name'];
-                return Text(
-                  'Welcome\n$userName',
-                  style: GoogleFonts.lato(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                return Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      'Welcome',
+                      style: GoogleFonts.lato(
+                          fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    Text(
+                      '$userName',
+                      style: GoogleFonts.lato(
+                          fontSize: 24, fontWeight: FontWeight.w400),
+                    ),
+                  ],
                 );
               }
             }
@@ -64,9 +74,9 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Container(
               height: 35,
               width: 35,
-              child: const Center(child: FaIcon(FontAwesomeIcons.bell)),
               decoration:
                   BoxDecoration(border: Border.all(color: Colors.black12)),
+              child: const Center(child: FaIcon(FontAwesomeIcons.bell)),
             ),
           )
         ],
@@ -86,6 +96,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   prefixIcon: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: FaIcon(
+                      // ignore: deprecated_member_use
                       FontAwesomeIcons.search,
                     ),
                   ),
@@ -106,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(
               height: 20,
             ),
-            Text(
+            const Text(
               'Trending Places',
               style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
             ),
@@ -200,9 +211,10 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                // ignore: avoid_unnecessary_containers
                                 Container(
                                   child: const FaIcon(
-                                    FontAwesomeIcons.locationArrow,
+                                    FontAwesomeIcons.locationDot,
                                     color: Colors.amber,
                                   ),
                                 ),
@@ -227,7 +239,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     children: [
                                       FaIcon(
                                         FontAwesomeIcons.arrowUpRightFromSquare,
-                                        color: Colors.greenAccent,
+                                        color: Colors.amber,
                                       ),
                                       SizedBox(
                                         width: 5,
@@ -259,22 +271,3 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 }
-
-
-//  Expanded(
-//               child: ListView.builder(
-//                 itemCount: dummyData.length,
-//                 itemBuilder: (context, index) {
-//                   return ListTile(
-//                     leading: Image.asset(
-//                       dummyData[index].image,
-//                       width: 50,
-//                       height: 50,
-//                       fit: BoxFit.cover,
-//                     ),
-//                     title: Text(dummyData[index].location),
-//                     subtitle: Text(dummyData[index].description),
-//                   );
-//                 },
-//               ),
-//             ),

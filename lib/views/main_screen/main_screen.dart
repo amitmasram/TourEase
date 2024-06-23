@@ -2,12 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 import 'package:vtg_app/views/main_screen/home/home_screen.dart';
-import 'package:vtg_app/views/main_screen/home/location_based_data_screen.dart';
+
 import 'package:vtg_app/views/main_screen/location/geo_location.dart';
 import 'package:vtg_app/views/main_screen/profile/profile_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({Key? key}) : super(key: key);
+  const MainScreen({super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -77,8 +77,9 @@ class CustomBottomNavigationBar extends StatelessWidget {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
+            // ignore: deprecated_member_use
             _buildNavItem(FontAwesomeIcons.home, 0),
-            _buildNavItem(FontAwesomeIcons.locationDot, 1),
+            _buildNavItem(FontAwesomeIcons.locationArrow, 1),
             _buildNavItem(FontAwesomeIcons.user, 2),
           ],
         ),

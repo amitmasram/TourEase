@@ -2,9 +2,9 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:vtg_app/views/main_screen/main_screen.dart';
-import 'package:vtg_app/views/authentication/signup_screen.dart';
+import 'package:vtg_app/views/authentication/signup/signup_screen.dart';
 
-import '../../services/firebase/auth_service.dart';
+import '../../../view-model/services/firebase/auth_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -203,15 +203,17 @@ class _LoginScreenState extends State<LoginScreen> {
           controller: controller,
           obscureText: obscureText,
           decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-          ),
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade400),
+              ),
+              border: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.grey.shade400),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(color: Colors.greenAccent),
+              )),
         ),
         const SizedBox(
           height: 30,
