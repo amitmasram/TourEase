@@ -36,6 +36,7 @@ dependencies:
 
   # Environment Variables
   flutter_dotenv: ^5.1.0            # Loading environment variables from .env file
+  
 
 # Development dependencies (e.g., testing frameworks)
 dev_dependencies:
@@ -44,6 +45,7 @@ dev_dependencies:
 
   # Linting rules for Flutter
   flutter_lints: ^3.0.1
+  flutter_launcher_icons: ^0.13.1
 
 # Flutter-specific configuration for the project (optional)
 flutter:
@@ -61,3 +63,15 @@ flutter:
   #   - family: ExampleFont
   #     fonts:
   #       - asset: fonts/example_font.ttf
+
+
+flutter_launcher_icons:
+  image_path: "assets/images/logo.jpg"
+  android: true
+  ios: true
+  min_sdk_android: 21
+  remove_alpha_ios: true
+  image_path_android: "assets/images/logo.jpg"
+  image_path_ios: "assets/images/logo.jpg"
+  adaptive_icon_background: "#FFFFFF"
+  adaptive_icon_foreground: "assets/images/logo.jpg"
