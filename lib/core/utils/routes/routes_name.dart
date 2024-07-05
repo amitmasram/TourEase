@@ -11,4 +11,7 @@ class RoutesName {
 
   /// The name of the home screen route.
   static const String home = '/home_screen';
+
+  // The name of the Home auth Screen
+  static const String homeAuth = '/home_auth_screen';
 }

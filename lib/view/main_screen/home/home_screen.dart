@@ -1,14 +1,17 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:TourEase/core/constants/text_strings.dart';
+import 'package:TourEase/core/utils/network_images.dart';
+import 'package:TourEase/core/utils/responsive.dart';
+import 'package:TourEase/core/utils/text_styles.dart';
+import 'package:TourEase/view/main_screen/home/carousal_slider.dart';
+
 import 'package:flutter/material.dart';
 
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 
-import 'package:vtg_app/views/main_screen/home/carousal_slider.dart';
-import 'package:vtg_app/views/main_screen/home/location_based_data_screen.dart';
-
+import '../../../core/constants/colors.dart';
+import '../../../core/helpers/helper.dart';
 import '../../../data/models/location_dummy.dart';
+import 'location_based_data_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -22,63 +25,48 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final dark = THelperFunctions.isDarkMode(context);
     return Scaffold(
+      backgroundColor: dark ? AppColors.dark : AppColors.light,
       appBar: AppBar(
-        title: FutureBuilder<DocumentSnapshot>(
-          future: FirebaseFirestore.instance
-              .collection('users')
-              .doc(FirebaseAuth
-                  .instance.currentUser!.uid) // Assuming user is logged in
-              .get(),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return Text(
-                'Welcome',
-                style:
-                    GoogleFonts.lato(fontSize: 24, fontWeight: FontWeight.w300),
-              );
-            } else {
-              if (snapshot.hasError) {
-                return Text(
-                  'Welcome',
-                  style: GoogleFonts.lato(
-                      fontSize: 24, fontWeight: FontWeight.w100),
-                );
-              } else {
-                var userData = snapshot.data!.data() as Map<String, dynamic>;
-                String userName = userData['name'];
-                return Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Welcome',
-                      style: GoogleFonts.lato(
-                          fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    Text(
-                      '$userName',
-                      style: GoogleFonts.lato(
-                          fontSize: 24, fontWeight: FontWeight.w400),
-                    ),
-                  ],
-                );
-              }
-            }
-          },
+        title: Text(
+          AppStrings.appName,
+          style: AppTextStyles.bodyText2,
         ),
         automaticallyImplyLeading: false,
         actions: [
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 23.0),
-            child: Container(
-              height: 35,
-              width: 35,
-              decoration:
-                  BoxDecoration(border: Border.all(color: Colors.black12)),
-              child: const Center(child: FaIcon(FontAwesomeIcons.bell)),
+            child: Row(
+              children: [
+                Container(
+                  child: const Center(
+                      child: FaIcon(
+                    FontAwesomeIcons.bell,
+                    size: 28,
+                  )),
+                ),
+                SizedBox(
+                  width: Responsive.screenWidth(context) * 0.06,
+                ),
+                Container(
+                  height: 36, // Adjusted height to make it fit more snugly
+                  width: 36, // Adjusted width to make it fit more snugly
+                  padding: const EdgeInsets.all(
+                      2), // Reduced padding to decrease thickness
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    boxShadow: [BoxShadow(color: Colors.grey.shade300)],
+                    gradient: GradientColors.gradient,
+                  ),
+                  child: const CircleAvatar(
+                    radius: 20, // Kept radius same as original
+                    backgroundImage: NetworkImage(NetworkImages.profilePic),
+                  ),
+                )
+              ],
             ),
-          )
+          ),
         ],
       ),
       body: SafeArea(
@@ -90,9 +78,10 @@ class _HomeScreenState extends State<HomeScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
+                cursorColor: dark ? AppColors.white : AppColors.darkGrey,
                 decoration: InputDecoration(
                   hintText: 'Search for places',
-                  hoverColor: Colors.amber,
+                  focusColor: AppColors.primary,
                   prefixIcon: const Padding(
                     padding: EdgeInsets.all(20.0),
                     child: FaIcon(
@@ -108,8 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(10.0),
                     borderSide: const BorderSide(
-                        color:
-                            Colors.amber), // Set the border color when focused
+                        color: AppColors
+                            .primary), // Set the border color when focused
                   ),
                 ),
               ),

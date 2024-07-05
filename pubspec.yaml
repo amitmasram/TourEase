@@ -1,4 +1,4 @@
-name: vtg_app
+name: TourEase
 description: "A new Flutter project."
 # Prevents accidental publishing to pub.dev
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
@@ -19,7 +19,6 @@ dependencies:
   cupertino_icons: ^1.0.2           # Provides Cupertino style icons for iOS
   concentric_transition: ^1.0.3     # Custom page transition animations
   google_fonts: ^6.2.1              # Integration of Google Fonts
-  animate_do: ^3.3.4                # Animation utilities and effects
   font_awesome_flutter: ^10.7.0     # Font Awesome icons
   carousel_slider: ^4.2.1           # Carousel/slider widget
 
@@ -36,6 +35,7 @@ dependencies:
 
   # Environment Variables
   flutter_dotenv: ^5.1.0            # Loading environment variables from .env file
+  smooth_page_indicator: ^1.1.0
   
 
 # Development dependencies (e.g., testing frameworks)

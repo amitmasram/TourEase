@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:vtg_app/views/authentication/login/login_screen.dart';
+
+import '../../authentication/login/login_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -52,7 +53,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
 
             ListTile(
-              leading:  FaIcon(FontAwesomeIcons.earthAmericas),
+              leading: FaIcon(FontAwesomeIcons.earthAmericas),
               title: const Text('Saved Trip'),
               onTap: () {
                 Navigator.pop(context);
