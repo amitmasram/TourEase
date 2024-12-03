@@ -1,13 +1,13 @@
-import 'package:TourEase/core/constants/text_strings.dart';
-import 'package:TourEase/core/utils/responsive.dart';
-import 'package:TourEase/core/utils/text_styles.dart';
-import 'package:TourEase/view/widgets/custom_button.dart';
-import 'package:TourEase/view/widgets/custom_text_field.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-import '../../../core/constants/colors.dart';
-import '../../../core/helpers/helper.dart';
-import '../../../view-model/services/firebase/auth_service.dart';
+import '../../core/constants/colors.dart';
+import '../../core/constants/text_strings.dart';
+import '../../core/helpers/helper.dart';
+import '../../core/utils/responsive.dart';
+import '../../core/utils/text_styles.dart';
+import '../widgets/custom_button.dart';
+import '../widgets/custom_text_field.dart';
 
 class ForgotPasswordScreen extends StatefulWidget {
   const ForgotPasswordScreen({super.key});
@@ -18,9 +18,8 @@ class ForgotPasswordScreen extends StatefulWidget {
 
 class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
     with SingleTickerProviderStateMixin {
-  final FirebaseAuthService _auth = FirebaseAuthService();
+  final auth = FirebaseAuth.instance;
   final TextEditingController _emailController = TextEditingController();
-  final TextEditingController _passwordController = TextEditingController();
 
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
@@ -48,11 +47,28 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
   @override
   void dispose() {
     _controller.dispose();
-
     _emailController.dispose();
-    _passwordController.dispose();
-
     super.dispose();
+  }
+
+  Future<void> _resetPassword() async {
+    final email = _emailController.text.trim();
+    if (email.isEmpty) {
+      _showSnackbar('Please enter your email.');
+      return;
+    }
+    try {
+      await auth.sendPasswordResetEmail(email: email);
+      _showSnackbar("Password reset link sent! Check your email.");
+    } catch (e) {
+      _showSnackbar("An error occurred. Please try again.");
+    }
+  }
+
+  void _showSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
   }
 
   @override
@@ -83,54 +99,47 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen>
           width: double.infinity,
           child: Column(
             children: <Widget>[
-              Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  SizedBox(height: Responsive.screenHeight(context) * 0.05),
-                  FadeTransition(
-                    opacity: _fadeAnimation,
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          AppStrings.resendEmail,
-                          style: AppTextStyles.headline1,
-                        ),
-                        const SizedBox(height: 20),
-                        Text(
-                          AppStrings.loginSubTitle,
-                          style: AppTextStyles.onBoardingSubTitle,
-                        ),
-                      ],
+              SizedBox(height: Responsive.screenHeight(context) * 0.05),
+              FadeTransition(
+                opacity: _fadeAnimation,
+                child: Column(
+                  children: <Widget>[
+                    Text(
+                      AppStrings.resendEmail,
+                      style: AppTextStyles.headline1,
                     ),
-                  ),
-                  SizedBox(height: Responsive.screenHeight(context) * 0.05),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 40),
-                    child: Column(
-                      children: <Widget>[
-                        SlideTransition(
-                          position: _slideAnimation,
-                          child: CustomTextField(
-                            label: "Email",
-                            controller: _emailController,
-                            obscureText: false,
-                            hintText: 'Enter your registered email',
-                          ),
-                        ),
-                      ],
+                    const SizedBox(height: 20),
+                    Text(
+                      AppStrings.loginSubTitle,
+                      style: AppTextStyles.onBoardingSubTitle,
                     ),
+                  ],
+                ),
+              ),
+              SizedBox(height: Responsive.screenHeight(context) * 0.05),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 40),
+                child: SlideTransition(
+                  position: _slideAnimation,
+                  child: CustomTextField(
+                    label: "Email",
+                    controller: _emailController,
+                    obscureText: false,
+                    hintText: 'Enter your registered email',
                   ),
-                  SizedBox(height: Responsive.screenHeight(context) * 0.05),
-                  SlideTransition(
-                    position: _slideAnimation,
-                    child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 40),
-                        child: GradientButton(
-                            text: AppStrings.confirmEmail,
-                            width: Responsive.screenWidth(context) * 0.8,
-                            onPressed: () {})),
+                ),
+              ),
+              SizedBox(height: Responsive.screenHeight(context) * 0.05),
+              SlideTransition(
+                position: _slideAnimation,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 40),
+                  child: GradientButton(
+                    text: AppStrings.confirmEmail,
+                    width: Responsive.screenWidth(context) * 0.8,
+                    onPressed: _resetPassword,
                   ),
-                ],
+                ),
               ),
             ],
           ),

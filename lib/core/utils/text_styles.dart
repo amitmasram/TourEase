@@ -24,11 +24,17 @@ class AppTextStyles {
   static final TextStyle bodyText = GoogleFonts.sourceSans3(
     fontSize: 14.0,
   );
+  static final TextStyle tabText = GoogleFonts.sourceSans3(
+    fontSize: 14.0,
+    fontWeight: FontWeight.w600,
+  );
 
   static final TextStyle bodyText2 = GoogleFonts.sourceSans3(
     fontSize: 19.0,
   );
-
+  static final TextStyle bodyText3 = GoogleFonts.sourceSans3(
+    fontSize: 21.0,
+  );
   static final TextStyle headline1 = GoogleFonts.sourceSans3(
     fontSize: 26.0,
     fontWeight: FontWeight.bold,

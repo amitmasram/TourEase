@@ -1,8 +1,9 @@
+import 'package:TourEase/view/onboarding/onboarding_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
+import '../view-model/user_prefrences.dart';
 import '../view/main_screen/main_screen.dart';
-import '../view/onboarding/onboarding_screen.dart';
 import 'app_theme.dart';
 
 class TourEase extends StatefulWidget {
@@ -15,21 +16,20 @@ class TourEase extends StatefulWidget {
 
 class _TourEaseState extends State<TourEase> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
-  late User? _user;
   bool _isLoading = true;
+  bool _isLoggedIn = false;
 
   @override
   void initState() {
     super.initState();
-    _checkIfUserLoggedIn();
+    _checkLoginStatus();
   }
 
-  void _checkIfUserLoggedIn() {
-    _auth.authStateChanges().listen((User? user) {
-      setState(() {
-        _user = user;
-        _isLoading = false;
-      });
+  void _checkLoginStatus() async {
+    bool isLoggedIn = await UserPreferences.isLoggedIn();
+    setState(() {
+      _isLoggedIn = isLoggedIn;
+      _isLoading = false;
     });
   }
 
@@ -44,14 +44,14 @@ class _TourEaseState extends State<TourEase> {
         themeMode: ThemeMode.system,
         theme: AppTheme.lightTheme,
         darkTheme: AppTheme.darkTheme,
-        routes: {},
-        home: _user != null ? const MainScreen() : const OnboardingScreen(),
+        routes: const {},
+        home: _isLoggedIn ? const MainScreen() : const OnboardingScreen(),
       );
     }
   }
 
   Widget _buildLoading() {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
       ),

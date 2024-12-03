@@ -10,6 +10,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/helpers/helper.dart';
 import '../../../view-model/services/firebase/auth_service.dart';
+import '../../../view-model/user_prefrences.dart';
 import '../../main_screen/main_screen.dart';
 import '../login/login_screen.dart';
 
@@ -23,9 +24,10 @@ class SignUpScreen extends StatefulWidget {
 class _SignUpScreenState extends State<SignUpScreen>
     with SingleTickerProviderStateMixin {
   final FirebaseAuthService _auth = FirebaseAuthService();
-  TextEditingController _nameController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+  bool _obscureText = false;
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -132,12 +134,17 @@ class _SignUpScreenState extends State<SignUpScreen>
                         SlideTransition(
                             position: _slideAnimation,
                             child: CustomTextField(
-                              label: "Password",
-                              controller: _passwordController,
-                              hintText: "Enter your password",
-                              obscureText: true,
-                              icon: Icons.visibility_off,
-                            )),
+                            label: "Password",
+                            controller: _passwordController,
+                            obscureText: _obscureText,
+                            hintText: 'Enter your password',
+                            icon: _obscureText ? Icons.visibility_off : Icons.visibility,
+                            onIconPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
+                          ),),
                       ],
                     ),
                   ),
@@ -188,83 +195,65 @@ class _SignUpScreenState extends State<SignUpScreen>
     );
   }
 
-  Widget makeInput({label, controller, obscureText = false}) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: <Widget>[
-        Text(
-          label,
-          style: const TextStyle(
-            fontSize: 15,
-            fontWeight: FontWeight.w400,
-            color: AppColors.white,
-          ),
-        ),
-        const SizedBox(
-          height: 5,
-        ),
-        TextField(
-          controller: controller,
-          obscureText: obscureText,
-          decoration: InputDecoration(
-            contentPadding:
-                const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
-            enabledBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-            border: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.grey.shade400),
-            ),
-            focusedBorder: OutlineInputBorder(
-              borderSide: BorderSide(color: Colors.greenAccent),
-            ),
-          ),
-        ),
-        const SizedBox(
-          height: 30,
-        ),
-      ],
-    );
-  }
-
-  void _signUp() async {
+  Future<void> _signUp() async {
     String username = _nameController.text.trim();
     String email = _emailController.text.trim();
     String password = _passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
-      // Display an error message if email or password is empty
-      print("Email and password are required.");
-      // You can also show an error message to the user using SnackBar
+    if (email.isEmpty || password.isEmpty || username.isEmpty) {
+      // Display an error message if email, password, or username is empty
+      print("Name, email, and password are required.");
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Email and password are required.")),
+        SnackBar(content: Text("Name, email, and password are required.")),
       );
       return;
     }
 
-    User? user = await _auth.signUpWithEmailAndPassword(email, password);
+   try {
+      User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
-    if (user != null) {
-      String userId = user.uid;
+      if (user != null) {
+        String userId = user.uid;
 
-      await FirebaseFirestore.instance.collection('users').doc(userId).set({
-        'name': username,
-        'email': email,
-        // You can add more user data here
-      });
-      print("User is successfully created");
+        await FirebaseFirestore.instance.collection('users').doc(userId).set({
+          'name': username,
+          'email': email,
+        });
+        print("User is successfully created");
 
-      // Navigate to the MainScreen after successful signup
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
-      );
-    } else {
-      // Display an error message if signup fails
-      print("Failed to sign up user.");
-      // You can also show an error message to the user using SnackBar
+        await UserPreferences.setLoggedIn(true);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      }
+    } on FirebaseAuthException catch (e) {
+      print("Failed to sign up user: $e");
+      String message;
+      switch (e.code) {
+        case 'network-request-failed':
+          message =
+              "Network error occurred. Please check your internet connection.";
+          break;
+        case 'email-already-in-use':
+          message = "The email address is already in use by another account.";
+          break;
+        case 'weak-password':
+          message = "The password provided is too weak.";
+          break;
+        case 'invalid-email':
+          message = "The email address is not valid.";
+          break;
+        default:
+          message = "An unknown error occurred.";
+      }
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text("Failed to sign up user.")),
+        SnackBar(content: Text(message)),
+      );
+    } catch (e) {
+      print("Failed to sign up user: $e");
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text("Failed to sign up user: ${e.toString()}")),
       );
     }
   }

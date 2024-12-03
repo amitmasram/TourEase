@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../core/constants/colors.dart';
 
+// This is the
+// ! ddis s
+// ? ddis s
+// * ddis s
+// ^ ddis s d
+// + ddis s d
 class GradientButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String text;

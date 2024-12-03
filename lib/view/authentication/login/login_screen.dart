@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import '../../../core/constants/colors.dart';
 import '../../../core/helpers/helper.dart';
 import '../../../view-model/services/firebase/auth_service.dart';
+import '../../../view-model/user_prefrences.dart';
 import '../../main_screen/main_screen.dart';
 import '../forget_password_screen.dart';
 import '../signup/signup_screen.dart';
@@ -25,7 +26,8 @@ class _LoginScreenState extends State<LoginScreen>
   final FirebaseAuthService _auth = FirebaseAuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+   // ignore: unused_field
+ bool _obscureText = true;
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -127,12 +129,17 @@ class _LoginScreenState extends State<LoginScreen>
                             height: Responsive.screenHeight(context) * 0.04),
                         SlideTransition(
                           position: _slideAnimation,
-                          child: CustomTextField(
+                          child:CustomTextField(
                             label: "Password",
                             controller: _passwordController,
-                            obscureText: true,
+                            obscureText: _obscureText,
                             hintText: 'Enter your password',
-                            icon: Icons.visibility_off,
+                            icon: _obscureText ? Icons.visibility_off : Icons.visibility,
+                            onIconPressed: () {
+                              setState(() {
+                                _obscureText = !_obscureText;
+                              });
+                            },
                           ),
                         ),
                       ],
@@ -217,9 +224,6 @@ class _LoginScreenState extends State<LoginScreen>
     String password = _passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      // Display an error message if email or password is empty
-      print("Email and password are required.");
-      // You can also show an error message to the user using SnackBar
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text("Email and password are required.")),
       );
@@ -230,18 +234,16 @@ class _LoginScreenState extends State<LoginScreen>
 
     if (user != null) {
       print("User is successfully Sign In");
-      // Navigate to the MainScreen after successful signup
+      await UserPreferences.setLoggedIn(true);
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (context) => const MainScreen()),
       );
     } else {
-      // Display an error message if signup fails
-      print("Failed to sign up user.");
-      // You can also show an error message to the user using SnackBar
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Failed to sign up user.")),
+        const SnackBar(content: Text("Failed to sign in user.")),
       );
     }
   }
+
 }

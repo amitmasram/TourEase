@@ -29,7 +29,7 @@ class AppTheme {
     scaffoldBackgroundColor: Colors.black,
     // textTheme: TTextTheme.darkTextTheme,
     // chipTheme: TChipTheme.lightChipTheme,
-    // // ignore: deprecated_member_use
+    // ignore: deprecated_member_use
     backgroundColor: Colors.black,
     appBarTheme: TAppBarTheme.darkAppBarTheme,
     // checkboxTheme: TCheckboxTheme.darkCheckboxTheme,

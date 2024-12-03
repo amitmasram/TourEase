@@ -72,4 +72,15 @@ class AppStrings {
 // -- Home
   static const String homeAppbarTitle = "Good day for shopping";
   static const String homeAppbarSubTitle = "Amit Masram";
+
+// TabBar
+  static const String all = "All";
+  static const String hills = "Hills";
+  static const String lakes = "Lakes";
+  static const String mountains = "Mountains";
+  static const String forests = "Forests";
+  static const String cities = "Cities";
+
+  static const String hillsTab = "Hills";
+  static const String trackTab = "Track";
 }
