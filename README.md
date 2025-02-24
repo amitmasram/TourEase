@@ -115,7 +115,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📬 Contact
 
-Amit Masram - [amitmasram831@gmail.com](mailto:amitmasram831@gmail.com)
+Amit Masram - [amitmasram831@gmail.com](mailto:amitxmasram@gmail.com)
 
 Project Link: [https://github.com/your-username/tourease-app](https://github.com/your-username/tourease-app)
 
