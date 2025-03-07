@@ -15,18 +15,22 @@
 - **Data Synchronization**: Sync your data across devices using Firebase.
 - **Responsive Design**: Optimized for both mobile and web platforms.
 
+
+## User Flow
+
+
+
 ## 🛠 Tech Stack
 
 - **Frontend**: [Flutter](https://flutter.dev) - A powerful toolkit for building natively compiled applications.
-- **Backend**: 
+- **Backend**:
   - [Node.js](https://nodejs.org) & [Express.js](https://expressjs.com) - Server-side runtime and framework.
   - [MongoDB](https://www.mongodb.com) - NoSQL database for flexible data storage.
-  - [Firebase](https://firebase.google.com) - For authentication and real-time database services.
-- **AI Integration**: [OpenAI GPT-4](https://openai.com/gpt-4) - Advanced language model for personalized recommendations.
+- **AI Integration**: [Gemini API](https://example.com/gemini-api) - Advanced language model for personalized recommendations.
 - **Maps Integration**: [Google Maps API](https://developers.google.com/maps) - For location-based services and navigation.
 - **State Management**: [Bloc](https://pub.dev/packages/bloc) - For managing state in a scalable way.
 
-## 🚀 Getting Started
+<!-- ## 🚀 Getting Started
 
 Follow these instructions to set up and run the project on your local machine.
 
@@ -76,25 +80,44 @@ Follow these instructions to set up and run the project on your local machine.
 6. **Run the App**:
     ```bash
     flutter run
-    ```
+    ``` -->
 
 ## 📁 Project Structure
 
 ```
+
 lib/
-│── main.dart                # Entry point of the application
-├── models/                  # Data models
-├── services/                # API and backend services
-├── screens/                 # App screens and UI
-├── widgets/                 # Reusable components
-└── utils/                   # Utility functions
+│── app/                  # Application-level configurations and setup
+├── core/                 # Core utilities and constants
+├── data/                 # Data models and repositories
+├── view/                # App screens and UI components
+├── view-model/     # State management and business logic
+└── main.dart          # Entry point of the application
 ```
 
 ## 🤝 Contributing
 
 Contributions are welcome! To contribute:
 
+If you have any feature suggestions or improvements, feel free to go ahead and contribute!
 1. **Fork the repository**.
+2. **Create a new branch**:
+      ```bash
+      git checkout -b feature/YourFeature
+      ```
+3. **Commit your changes**:
+      ```bash
+      git commit -m 'Add some feature'
+      ```
+4. **Push to the branch**:
+      ```bash
+      git push origin feature/YourFeature
+      ```
+5. **Open a pull request**.
+
+
+
+<!-- 1. **Fork the repository**.
 2. **Create a new branch**:
     ```bash
     git checkout -b feature/YourFeature
@@ -107,7 +130,7 @@ Contributions are welcome! To contribute:
     ```bash
     git push origin feature/YourFeature
     ```
-5. **Open a pull request**.
+5. **Open a pull request**. -->
 
 ## 📝 License
 
@@ -115,7 +138,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📬 Contact
 
-Amit Masram - [amitmasram831@gmail.com](mailto:amitmasram831@gmail.com)
+Amit Masram - [amitxmasram@gmail.com](mailto:amitxmasram@gmail.com)
 
 Project Link: [https://github.com/your-username/tourease-app](https://github.com/your-username/tourease-app)
 
