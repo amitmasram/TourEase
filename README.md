@@ -1,9 +1,9 @@
 
 ---
 
-# 🌟 TourEase - AI-Powered Personalized Tour Guide app designed to enhance your travel experiences.
+# TourEase - AI-Powered Personalized Tour Guide App
 
-**TourEase** is an advanced travel application designed to provide a personalized tour guide experience powered by AI assistant. Built with modern technologies including Flutter, Dart, Firebase, Node.js, Express.js, MongoDB, and integrated with OpenAI GPT-4 and Google Maps, TourEase delivers tailored travel recommendations and interactive journeys.
+**TourEase** is a travel app that offers personalized tour guide experiences using AI. Built with Flutter, Dart, Firebase, Node.js, Express.js, MongoDB, OpenAI GPT-4, and Google Maps, it provides tailored travel recommendations and interactive journeys.
 
 ## 🚀 Features
 
@@ -15,22 +15,35 @@
 - **Data Synchronization**: Sync your data across devices using Firebase.
 - **Responsive Design**: Optimized for both mobile and web platforms.
 
+
+## User Flow
+![image (3)](https://github.com/user-attachments/assets/003a37f8-b9d7-428b-bd9f-02fc90a8f6f6)
+
+
+
+
+
+## Architecture
+![image (2)](https://github.com/user-attachments/assets/a5690fe4-76ac-4307-ad3c-fc308dbfa68c)
+
 ## 🛠 Tech Stack
 
 - **Frontend**: [Flutter](https://flutter.dev) - A powerful toolkit for building natively compiled applications.
-- **Backend**: 
+- **Backend**:
   - [Node.js](https://nodejs.org) & [Express.js](https://expressjs.com) - Server-side runtime and framework.
   - [MongoDB](https://www.mongodb.com) - NoSQL database for flexible data storage.
-  - [Firebase](https://firebase.google.com) - For authentication and real-time database services.
-- **AI Integration**: [OpenAI GPT-4](https://openai.com/gpt-4) - Advanced language model for personalized recommendations.
+- **AI Integration**: [Gemini API](https://example.com/gemini-api) - Advanced language model for personalized recommendations.
 - **Maps Integration**: [Google Maps API](https://developers.google.com/maps) - For location-based services and navigation.
 - **State Management**: [Bloc](https://pub.dev/packages/bloc) - For managing state in a scalable way.
 
-## 🚀 Getting Started
+<!-- ## 🚀 Getting Started
 
-Follow these instructions to set up and run the project on your local machine.
+Follow these instructions to set up and ru
+n the project on your local machine.
+
 
 ### Prerequisites
+![image (3)](https://github.com/user-attachments/assets/25d44525-45a6-472e-a232-0b7336d8214f)
 
 - [Flutter SDK](https://flutter.dev/docs/get-started/install)
 - A [Firebase](https://firebase.google.com) project for authentication and database services.
@@ -76,25 +89,44 @@ Follow these instructions to set up and run the project on your local machine.
 6. **Run the App**:
     ```bash
     flutter run
-    ```
+    ``` -->
 
 ## 📁 Project Structure
 
 ```
+
 lib/
-│── main.dart                # Entry point of the application
-├── models/                  # Data models
-├── services/                # API and backend services
-├── screens/                 # App screens and UI
-├── widgets/                 # Reusable components
-└── utils/                   # Utility functions
+│── app/                  # Application-level configurations and setup
+├── core/                 # Core utilities and constants
+├── data/                 # Data models and repositories
+├── view/                # App screens and UI components
+├── view-model/     # State management and business logic
+└── main.dart          # Entry point of the application
 ```
 
 ## 🤝 Contributing
 
 Contributions are welcome! To contribute:
 
+If you have any feature suggestions or improvements, feel free to go ahead and contribute!
 1. **Fork the repository**.
+2. **Create a new branch**:
+      ```bash
+      git checkout -b feature/YourFeature
+      ```
+3. **Commit your changes**:
+      ```bash
+      git commit -m 'Add some feature'
+      ```
+4. **Push to the branch**:
+      ```bash
+      git push origin feature/YourFeature
+      ```
+5. **Open a pull request**.
+
+
+
+<!-- 1. **Fork the repository**.
 2. **Create a new branch**:
     ```bash
     git checkout -b feature/YourFeature
@@ -107,7 +139,7 @@ Contributions are welcome! To contribute:
     ```bash
     git push origin feature/YourFeature
     ```
-5. **Open a pull request**.
+5. **Open a pull request**. -->
 
 ## 📝 License
 
@@ -115,7 +147,7 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## 📬 Contact
 
-Amit Masram - [amitmasram831@gmail.com](mailto:amitxmasram@gmail.com)
+Amit Masram - [amitxmasram@gmail.com](mailto:amitxmasram@gmail.com)
 
 Project Link: [https://github.com/your-username/tourease-app](https://github.com/your-username/tourease-app)
 
