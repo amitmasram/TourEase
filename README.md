@@ -3,7 +3,7 @@
 
 # TourEase - AI-Powered Personalized Tour Guide App
 
-**TourEase** is a travel app that offers personalized tour guide experiences using AI. Built with Flutter, Dart, Firebase, Node.js, Express.js, MongoDB, OpenAI GPT-4, and Google Maps, it provides tailored travel recommendations and interactive journeys.
+Struggling with generic travel plans? TourEase solves the problem of impersonal travel experiences by offering AI-powered, personalized tour guides that adapt to your preferences. Explore smarter, not harder!
 
 ## 🚀 Features
 
