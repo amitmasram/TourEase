@@ -29,6 +29,15 @@ Struggling with generic travel plans? TourEase solves the problem of impersonal 
 
 ---
 
+
+
+
+https://github.com/user-attachments/assets/abb52f5f-75dd-439b-8b8a-bb38b6ae62bd
+
+
+
+
+
 ## User Flow
 ![image (3)](https://github.com/user-attachments/assets/003a37f8-b9d7-428b-bd9f-02fc90a8f6f6)
 
