@@ -56,7 +56,7 @@ https://github.com/user-attachments/assets/abb52f5f-75dd-439b-8b8a-bb38b6ae62bd
   - [MongoDB](https://www.mongodb.com) - NoSQL database for flexible data storage.
 - **AI Integration**: [Gemini API](https://example.com/gemini-api) - Advanced language model for personalized recommendations.
 - **Maps Integration**: [Google Maps API](https://developers.google.com/maps) - For location-based services and navigation.
-- **State Management**: [Bloc](https://pub.dev/packages/bloc) - For managing state in a scalable way.
+- **State Management**: [Bloc](https://pub.dev/packages/provider) - For managing state in a scalable way.
 
 
 
