@@ -15,19 +15,7 @@ Struggling with generic travel plans? TourEase solves the problem of impersonal 
 - **Data Synchronization**: Sync your data across devices using Firebase.
 - **Responsive Design**: Optimized for both mobile and web platforms.
 
-## 📊 Current Development Status
 
-| Module                    | Status         |
-|--------------------------|----------------|
-| Flutter UI               | ✅ Completed   |
-| Firebase Authentication  | ✅ Completed   |
-| AI Integration (Gemini)  | ✅ Completed   |
-| Google APIs Integration  | ✅ Completed   |
-| Backend with Node.js     | ⏳ Upcoming    |
-| MongoDB Integration      | ⏳ Upcoming    |
-| Final Testing/Polishing  | ⏳ Upcoming    |
-
----
 
 
 
