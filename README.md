@@ -53,6 +53,7 @@ https://github.com/user-attachments/assets/abb52f5f-75dd-439b-8b8a-bb38b6ae62bd
 
 
 ## 📁 Project Structure
+This project follows the **MVVM (Model-View-ViewModel)** architecture.
 
 ```
 
