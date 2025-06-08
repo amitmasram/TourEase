@@ -20,6 +20,8 @@ Struggling with generic travel plans? TourEase solves the problem of impersonal 
 
 
 
+
+
 https://github.com/user-attachments/assets/abb52f5f-75dd-439b-8b8a-bb38b6ae62bd
 
 
@@ -39,12 +41,14 @@ https://github.com/user-attachments/assets/abb52f5f-75dd-439b-8b8a-bb38b6ae62bd
 ## 🛠 Tech Stack
 
 - **Frontend**: [Flutter](https://flutter.dev) - A powerful toolkit for building natively compiled applications.
-- **Backend**:
-  - [Node.js](https://nodejs.org) & [Express.js](https://expressjs.com) - Server-side runtime and framework.
-  - [MongoDB](https://www.mongodb.com) - NoSQL database for flexible data storage.
+- **Backend**:  
+  - [Firebase](https://firebase.google.com) – Used for:
+    - **Authentication** – Secure sign-in methods for users.
+    - **Cloud Storage** – For storing user-generated content and assets.
+    - **Analytics** – Track user interactions and app performance.
 - **AI Integration**: [Gemini API](https://example.com/gemini-api) - Advanced language model for personalized recommendations.
-- **Maps Integration**: [Google Maps API](https://developers.google.com/maps) - For location-based services and navigation.
-- **State Management**: [Bloc](https://pub.dev/packages/provider) - For managing state in a scalable way.
+- **Maps Integration**: [Google Maps API (Places)](https://developers.google.com/maps) - For location-based services and navigation.
+- **State Management**: [Provider](https://pub.dev/packages/provider) - For managing state in a scalable way.
 
 
 
