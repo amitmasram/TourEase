@@ -1,0 +1,2 @@
+D:/Nit projects/TourEase/android/app/.cxx/Debug/2n2l2jo6/x86/CMakeFiles/edit_cache.dir
+D:/Nit projects/TourEase/android/app/.cxx/Debug/2n2l2jo6/x86/CMakeFiles/rebuild_cache.dir

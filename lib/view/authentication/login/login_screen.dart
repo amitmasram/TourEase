@@ -1,8 +1,10 @@
 import 'package:TourEase/core/constants/text_strings.dart';
 import 'package:TourEase/core/utils/responsive.dart';
 import 'package:TourEase/core/utils/text_styles.dart';
+import 'package:TourEase/view/authentication/verify_email.dart';
 import 'package:TourEase/view/widgets/custom_button.dart';
 import 'package:TourEase/view/widgets/custom_text_field.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -181,7 +183,7 @@ class _LoginScreenState extends State<LoginScreen>
                         child: GradientButton(
                             text: AppStrings.signIn,
                             width: Responsive.screenWidth(context) * 0.8,
-                            onPressed: _signIn)),
+                            onPressed: _login)),
                   ),
                   SizedBox(height: Responsive.screenHeight(context) * 0.05),
                   SlideTransition(
@@ -219,31 +221,93 @@ class _LoginScreenState extends State<LoginScreen>
     );
   }
 
-  void _signIn() async {
-    String email = _emailController.text.trim();
-    String password = _passwordController.text.trim();
+ Future<void> _login() async {
+  String email = _emailController.text.trim();
+  String password = _passwordController.text.trim();
 
-    if (email.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Email and password are required.")),
-      );
-      return;
-    }
+  if (email.isEmpty || password.isEmpty) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Email and password are required.")),
+    );
+    return;
+  }
 
+  try {
     User? user = await _auth.signInWithEmailAndPassword(email, password);
 
     if (user != null) {
-      print("User is successfully Sign In");
-      await UserPreferences.setLoggedIn(true);
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const MainScreen()),
-      );
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text("Failed to sign in user.")),
-      );
+      // Check if the user's email is verified
+      if (user.emailVerified) {
+        // Email is verified, proceed to main screen
+        await UserPreferences.setLoggedIn(true);
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (context) => const MainScreen()),
+        );
+      } else {
+        // Email not verified, fetch name from Firestore or use email as fallback
+        String username = "";
+        try {
+          DocumentSnapshot userDoc = await FirebaseFirestore.instance
+              .collection('users')
+              .doc(user.uid)
+              .get();
+
+          if (userDoc.exists && userDoc.data() != null) {
+            Map<String, dynamic> userData = userDoc.data() as Map<String, dynamic>;
+            username = userData['name'] ?? "";
+          }
+        } catch (e) {
+          print("Error fetching user data: $e");
+        }
+
+        // If no name found in Firestore, use email username part
+        if (username.isEmpty) {
+          username = email.split('@')[0];
+        }
+
+        // Send to verification page
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => VerifyEmailPage(username: username),
+          ),
+        );
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text("Please verify your email before logging in.")),
+        );
+      }
     }
+  } on FirebaseAuthException catch (e) {
+    String message;
+    switch (e.code) {
+      case 'user-not-found':
+        message = "No user found with this email.";
+        break;
+      case 'wrong-password':
+        message = "Invalid password for this account.";
+        break;
+      case 'invalid-email':
+        message = "The email address is not valid.";
+        break;
+      case 'user-disabled':
+        message = "This user account has been disabled.";
+        break;
+      case 'network-request-failed':
+        message = "Network error occurred. Please check your internet connection.";
+        break;
+      default:
+        message = "An unknown error occurred.";
+    }
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(message)),
+    );
+  } catch (e) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text("Login failed: ${e.toString()}")),
+    );
   }
+}
 
 }

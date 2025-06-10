@@ -23,7 +23,8 @@ dependencies:
   carousel_slider: ^4.2.1           # Carousel/slider widget
 
   # State Management and Navigation
-  get: ^4.6.6                       # State management and dependency injection
+  provider: ^6.1.5                  # State management solution
+  get_it:                     # Service locator for dependency injection
 
   # Firebase Integration
   firebase_core: ^2.27.1            # Firebase initialization
@@ -40,6 +41,13 @@ dependencies:
   firebase_storage: ^11.7.7
   avatar_glow: ^3.0.1
   image_picker: ^1.1.2
+  cached_network_image: ^3.4.0
+  http: ^1.2.2
+  url_launcher: ^6.3.1
+  google_generative_ai: ^0.4.6
+  googlemaps_flutter_webservices: ^1.0.2
+  dio: ^5.8.0+1
+
 
 
 

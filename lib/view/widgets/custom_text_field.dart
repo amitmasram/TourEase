@@ -9,7 +9,10 @@ class CustomTextField extends StatelessWidget {
   final String label;
   final IconData? icon;
   final bool obscureText;
-  final VoidCallback? onIconPressed; // Add this callback for the icon press
+  final int? maxLines;
+  final VoidCallback? onIconPressed;
+  final Function(String)? onChanged; // Added onChanged callback
+  final String? errorText; // Added errorText parameter
 
   const CustomTextField({
     super.key,
@@ -17,8 +20,11 @@ class CustomTextField extends StatelessWidget {
     required this.hintText,
     required this.controller,
     required this.label,
+    this.maxLines,
     this.obscureText = false,
-    this.onIconPressed, // Initialize it in the constructor
+    this.onIconPressed,
+    this.onChanged, // Initialize in constructor
+    this.errorText, // Initialize in constructor
   });
 
   @override
@@ -29,9 +35,11 @@ class CustomTextField extends StatelessWidget {
         Text(label, style: AppTextStyles.bodyText),
         const SizedBox(height: 5),
         TextFormField(
+          maxLines: maxLines ?? 1,
           controller: controller,
           obscureText: obscureText,
           cursorColor: AppColors.primary,
+          onChanged: onChanged, // Use the onChanged callback
           decoration: InputDecoration(
             hintText: hintText,
             hintStyle: AppTextStyles.bodyText,
@@ -39,7 +47,7 @@ class CustomTextField extends StatelessWidget {
                 ? null
                 : IconButton(
                     icon: Icon(icon),
-                    onPressed: onIconPressed,  // Trigger the callback
+                    onPressed: onIconPressed,
                   ),
             contentPadding: const EdgeInsets.symmetric(vertical: 0, horizontal: 10),
             enabledBorder: OutlineInputBorder(
@@ -51,6 +59,7 @@ class CustomTextField extends StatelessWidget {
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.primary),
             ),
+            errorText: errorText, // Display error message
           ),
         ),
       ],

@@ -1,17 +1,17 @@
 import 'package:TourEase/core/constants/text_strings.dart';
 import 'package:TourEase/core/utils/responsive.dart';
 import 'package:TourEase/core/utils/text_styles.dart';
+import 'package:TourEase/view/authentication/verify_email.dart';
 import 'package:TourEase/view/widgets/custom_button.dart';
 import 'package:TourEase/view/widgets/custom_text_field.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import '../../../core/constants/colors.dart';
 import '../../../core/helpers/helper.dart';
 import '../../../view-model/services/firebase/auth_service.dart';
-import '../../../view-model/user_prefrences.dart';
-import '../../main_screen/main_screen.dart';
+
 import '../login/login_screen.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -28,6 +28,7 @@ class _SignUpScreenState extends State<SignUpScreen>
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   bool _obscureText = false;
+  String? _emailError;
   late AnimationController _controller;
   late Animation<double> _fadeAnimation;
   late Animation<Offset> _slideAnimation;
@@ -128,23 +129,39 @@ class _SignUpScreenState extends State<SignUpScreen>
                               controller: _emailController,
                               hintText: "Enter your email",
                               obscureText: false,
+                              onChanged: (value) {
+                                setState(() {
+                                  if (!RegExp(
+                                          r"^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$")
+                                      .hasMatch(value)) {
+                                    _emailError =
+                                        "Please enter a valid email address.";
+                                  } else {
+                                    _emailError = null;
+                                  }
+                                });
+                              },
+                              errorText: _emailError,
                             )),
                         SizedBox(
                             height: Responsive.screenHeight(context) * 0.04),
                         SlideTransition(
-                            position: _slideAnimation,
-                            child: CustomTextField(
+                          position: _slideAnimation,
+                          child: CustomTextField(
                             label: "Password",
                             controller: _passwordController,
                             obscureText: _obscureText,
                             hintText: 'Enter your password',
-                            icon: _obscureText ? Icons.visibility_off : Icons.visibility,
+                            icon: _obscureText
+                                ? Icons.visibility_off
+                                : Icons.visibility,
                             onIconPressed: () {
                               setState(() {
                                 _obscureText = !_obscureText;
                               });
                             },
-                          ),),
+                          ),
+                        ),
                       ],
                     ),
                   ),
@@ -209,22 +226,21 @@ class _SignUpScreenState extends State<SignUpScreen>
       return;
     }
 
-   try {
+    try {
       User? user = await _auth.signUpWithEmailAndPassword(email, password);
 
       if (user != null) {
-        String userId = user.uid;
+        // Don't store data in Firestore yet - wait until email verification
+        print("User account created, waiting for email verification");
 
-        await FirebaseFirestore.instance.collection('users').doc(userId).set({
-          'name': username,
-          'email': email,
-        });
-        print("User is successfully created");
+        // We no longer set the user as logged in here
+        // await UserPreferences.setLoggedIn(true);
 
-        await UserPreferences.setLoggedIn(true);
+        // Pass the username to the verification page
         Navigator.pushReplacement(
           context,
-          MaterialPageRoute(builder: (context) => const MainScreen()),
+          MaterialPageRoute(
+              builder: (context) => VerifyEmailPage(username: username)),
         );
       }
     } on FirebaseAuthException catch (e) {

@@ -4,9 +4,11 @@ import 'package:TourEase/core/utils/responsive.dart';
 import 'package:TourEase/core/utils/text_styles.dart';
 import 'package:TourEase/view/main_screen/home/notification_screen.dart';
 import 'package:TourEase/view/main_screen/home/tabs_screens/all_screen.dart';
+import 'package:TourEase/view/main_screen/home/tabs_screens/lakes_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../../../core/helpers/helper.dart';
+import 'tabs_screens/hills_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -40,6 +42,7 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
+  // ignore: unused_element
   void _showEditProfileBottomSheet() {
     showModalBottomSheet(
       context: context,
@@ -126,28 +129,28 @@ class _HomeScreenState extends State<HomeScreen>
                         ),
                       ),
                       SizedBox(
-                        width: Responsive.screenWidth(context) * 0.06,
+                        width: Responsive.screenWidth(context) * 0.04,
                       ),
-                      GestureDetector(
-                        onTap: _showEditProfileBottomSheet,
-                        child: Container(
-                          height: 32,
-                          width: 32,
-                          padding: const EdgeInsets.all(1.5),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(16.0),
-                            boxShadow: [BoxShadow(color: Colors.grey.shade300)],
-                            gradient: GradientColors.gradient,
-                          ),
-                          child: const ClipOval(
-                            child: Image(
-                              fit: BoxFit.fill,
-                              image: NetworkImage(
-                                  'https://media.licdn.com/dms/image/v2/D5603AQFTcBY13wkKpQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1711761057818?e=1733961600&v=beta&t=CGYJJY3E42DyCTO63303t_PXdKuM-xlTGImtj3sOE4k'),
-                            ),
-                          ),
-                        ),
-                      ),
+                      // GestureDetector(
+                      //   onTap: _showEditProfileBottomSheet,
+                      //   child: Container(
+                      //     height: 32,
+                      //     width: 32,
+                      //     padding: const EdgeInsets.all(1.5),
+                      //     decoration: BoxDecoration(
+                      //       borderRadius: BorderRadius.circular(16.0),
+                      //       boxShadow: [BoxShadow(color: Colors.grey.shade300)],
+                      //       gradient: GradientColors.gradient,
+                      //     ),
+                      //     child: const ClipOval(
+                      //       child: Image(
+                      //         fit: BoxFit.fill,
+                      //         image: NetworkImage(
+                      //             'https://media.licdn.com/dms/image/v2/D5603AQFTcBY13wkKpQ/profile-displayphoto-shrink_400_400/profile-displayphoto-shrink_400_400/0/1711761057818?e=1733961600&v=beta&t=CGYJJY3E42DyCTO63303t_PXdKuM-xlTGImtj3sOE4k'),
+                      //       ),
+                      //     ),
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
@@ -188,12 +191,12 @@ class _HomeScreenState extends State<HomeScreen>
         body: TabBarView(
           controller: _tabController,
           physics: const BouncingScrollPhysics(),
-          children: const [
+          children: [
 
             AllScreen(),
-            Center(child: Text(AppStrings.hills)),
+            HillsScreen(),
             Center(child: Text(AppStrings.mountains)),
-            Center(child: Text(AppStrings.lakes)),
+            LakesScreen(),
             Center(child: Text(AppStrings.cities)),
             Center(child: Text(AppStrings.trackTab)),
           ],

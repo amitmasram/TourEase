@@ -15,6 +15,7 @@ class TourEase extends StatefulWidget {
 }
 
 class _TourEaseState extends State<TourEase> {
+  // ignore: unused_field
   final FirebaseAuth _auth = FirebaseAuth.instance;
   bool _isLoading = true;
   bool _isLoggedIn = false;

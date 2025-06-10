@@ -10,10 +10,11 @@ class AppTheme {
     brightness: Brightness.light,
     primaryColor: Colors.blue,
     scaffoldBackgroundColor: Colors.white,
+
     // textTheme: TTextTheme.lightTextTheme,
     // chipTheme: TChipTheme.lightChipTheme,
     // ignore: deprecated_member_use
-    backgroundColor: Colors.white,
+    colorScheme: ColorScheme.light(background: Colors.white),
     appBarTheme: TAppBarTheme.lightAppBarTheme,
     // checkboxTheme: TCheckboxTheme.lightCheckboxTheme,
     // bottomSheetTheme: TBottomSheetTheme.lightBottomSheetTheme,
@@ -30,7 +31,7 @@ class AppTheme {
     // textTheme: TTextTheme.darkTextTheme,
     // chipTheme: TChipTheme.lightChipTheme,
     // ignore: deprecated_member_use
-    backgroundColor: Colors.black,
+    colorScheme: ColorScheme.dark(background: Colors.black),
     appBarTheme: TAppBarTheme.darkAppBarTheme,
     // checkboxTheme: TCheckboxTheme.darkCheckboxTheme,
     // bottomSheetTheme: TBottomSheetTheme.darkBottomSheetTheme,

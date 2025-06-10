@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_const_constructors_in_immutables
+
 import 'package:TourEase/core/utils/text_styles.dart';
 import 'package:flutter/material.dart';
 
